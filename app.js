@@ -26,8 +26,8 @@ function Menu() {
   ])
   .then(({ menu }) => {
       switch (menu) {
-        case menu === 'Create Manager':
-          function manager() {
+        case 'Create Manager':
+          
             inquirer.prompt([
               {
                 type: 'input',
@@ -52,14 +52,14 @@ function Menu() {
             ])
               .then(({ name, id, email, officeNumber }) => {
                 team.push(new Manager(name, id, email, officeNumber))
+                Menu()
               })
-            Menu()
               .catch(err => console.log(err))
-          }
+          
           break;
 
-        case menu === 'Create Engineer':
-          function engineer() {
+        case 'Create Engineer':
+          
             inquirer.prompt([
               {
                 type: 'input',
@@ -85,14 +85,14 @@ function Menu() {
             ])
               .then(({ name, id, email, github }) => {
                 team.push(new Engineer(name, id, email, github))
+                Menu()
               })
-            Menu()
               .catch(err => console.log(err))
-          }
+          
           break;
 
-        case menu === 'Create Employee':
-          function employee() {
+        case 'Create Employee':
+          
             inquirer.prompt([
               {
                 type: 'input',
@@ -112,14 +112,14 @@ function Menu() {
             ])
               .then(({ name, id, email }) => {
                 team.push(new Employee(name, id, email))
+                Menu()
               })
-            Menu()
               .catch(err => console.log(err))
-          }
+          
           break;
 
-        case menu === 'Create Intern':
-          function intern() {
+        case 'Create Intern':
+          
             inquirer.prompt([
               {
                 type: 'input',
@@ -144,12 +144,12 @@ function Menu() {
             ])
               .then(({ name, id, email, school }) => {
                 team.push(new Intern(name, id, email, school))
+                Menu()
               })
-            Menu()
               .catch(err => console.log(err))
-          }
+          
           break;
-        case menu === 'Finish Team':
+        case 'Finish Team':
           function Finish() {
             inquirer.prompt([
               {
@@ -161,7 +161,16 @@ function Menu() {
             ])
               .then(({ finish }) => {
                 if (finish === 'Yes') {
-                  fs.writeFile(path.join(__dirname, 'output', 'team.html'))
+                  let htmlPage = render(team)
+                  if (!fs.existsSync(OUTPUT_DIR)) {
+                    fs.mkdirSync(OUTPUT_DIR)
+                  }
+                  fs.writeFile(outputPath, htmlPage, err => {
+                    if (err) {
+                      console.log(err)
+                    }
+                  })
+                  process.exit()
                 } else if (finish === 'No') {
                   Menu()
                 }
@@ -173,7 +182,7 @@ function Menu() {
      
     })
       .catch (err => console.log(err))
-  })
+  }
 Menu()
 
 
