@@ -140,7 +140,7 @@ function Menu() {
                     if (err) { console.log(err) }
                   })
                   console.log(team)
-                  process.exit()
+                  
 
                 } else if (finish === 'No') {
                   Menu()
