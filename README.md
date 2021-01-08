@@ -1,6 +1,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# readMeGenerator
+# templateEngine
 ## Description
 This app is used to generate an html file from console prompts that creates an array of objects and renders them on the html page.
 This app is using technologies such as inquirer, node, and path alongside standard html and javascript.
