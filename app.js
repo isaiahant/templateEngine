@@ -19,138 +19,112 @@ function Menu() {
   inquirer.prompt([
     {
       type: 'list',
-      name: 'Menu',
+      name: 'menu',
       message: 'What would you like to do?',
-      choices: ['Create Manager', 'Create Engineer', 'Create Employee', 'Create Intern', 'Finish Team']
+      choices: ['Create Manager', 'Create Engineer', 'Create Intern', 'Finish Team']
     }
   ])
-  .then(({ menu }) => {
+    .then(({ menu }) => {
       switch (menu) {
         case 'Create Manager':
-          
-            inquirer.prompt([
-              {
-                type: 'input',
-                name: 'name',
-                message: "What is the manager's name"
-              },
-              {
-                type: 'input',
-                name: 'id',
-                message: 'What is the id number of the manager?'
-              },
-              {
-                type: 'input',
-                name: 'email',
-                message: 'What is the email of the manager?'
-              },
-              {
-                type: 'input',
-                name: 'officeNumber',
-                message: 'What is the office number of the manager?'
-              },
-            ])
-              .then(({ name, id, email, officeNumber }) => {
-                team.push(new Manager(name, id, email, officeNumber))
-                Menu()
-              })
-              .catch(err => console.log(err))
-          
+
+          inquirer.prompt([
+            {
+              type: 'input',
+              name: 'name',
+              message: "What is the manager's name"
+            },
+            {
+              type: 'input',
+              name: 'id',
+              message: 'What is the id number of the manager?'
+            },
+            {
+              type: 'input',
+              name: 'email',
+              message: 'What is the email of the manager?'
+            },
+            {
+              type: 'input',
+              name: 'officeNumber',
+              message: 'What is the office number of the manager?'
+            },
+          ])
+            .then(({ name, id, email, officeNumber }) => {
+              team.push(new Manager(name, id, email, officeNumber))
+              Menu()
+            })
+            .catch(err => console.log(err))
+
           break;
 
         case 'Create Engineer':
-          
-            inquirer.prompt([
-              {
-                type: 'input',
-                name: 'name',
-                message: "What is the engineer's name"
-              },
-              // nice 
-              {
-                type: 'input',
-                name: 'id',
-                message: 'What is the id number of the engineer?'
-              },
-              {
-                type: 'input',
-                name: 'email',
-                message: 'What is the email of the engineer?'
-              },
-              {
-                type: 'input',
-                name: 'github',
-                message: 'What is the github account of the engineer?'
-              },
-            ])
-              .then(({ name, id, email, github }) => {
-                team.push(new Engineer(name, id, email, github))
-                Menu()
-              })
-              .catch(err => console.log(err))
-          
+
+          inquirer.prompt([
+            {
+              type: 'input',
+              name: 'name',
+              message: "What is the engineer's name"
+            },
+            // nice 
+            {
+              type: 'input',
+              name: 'id',
+              message: 'What is the id number of the engineer?'
+            },
+            {
+              type: 'input',
+              name: 'email',
+              message: 'What is the email of the engineer?'
+            },
+            {
+              type: 'input',
+              name: 'github',
+              message: 'What is the github account of the engineer?'
+            },
+          ])
+            .then(({ name, id, email, github }) => {
+              team.push(new Engineer(name, id, email, github))
+              Menu()
+            })
+            .catch(err => console.log(err))
+
           break;
 
-        case 'Create Employee':
-          
-            inquirer.prompt([
-              {
-                type: 'input',
-                name: 'name',
-                message: "What is the employee's name"
-              },
-              {
-                type: 'input',
-                name: 'id',
-                message: 'What is the id number of the employee?'
-              },
-              {
-                type: 'input',
-                name: 'email',
-                message: 'What is the email of the employee?'
-              },
-            ])
-              .then(({ name, id, email }) => {
-                team.push(new Employee(name, id, email))
-                Menu()
-              })
-              .catch(err => console.log(err))
-          
-          break;
 
         case 'Create Intern':
-          
-            inquirer.prompt([
-              {
-                type: 'input',
-                name: 'name',
-                message: "What is the intern's name"
-              },
-              {
-                type: 'input',
-                name: 'id',
-                message: 'What is the id number of the intern?'
-              },
-              {
-                type: 'input',
-                name: 'email',
-                message: 'What is the email of the intern?'
-              },
-              {
-                type: 'input',
-                name: 'school',
-                message: 'Which school does the intern attend?'
-              }
-            ])
-              .then(({ name, id, email, school }) => {
-                team.push(new Intern(name, id, email, school))
-                Menu()
-              })
-              .catch(err => console.log(err))
-          
+
+          inquirer.prompt([
+            {
+              type: 'input',
+              name: 'name',
+              message: "What is the intern's name"
+            },
+            {
+              type: 'input',
+              name: 'id',
+              message: 'What is the id number of the intern?'
+            },
+            {
+              type: 'input',
+              name: 'email',
+              message: 'What is the email of the intern?'
+            },
+            {
+              type: 'input',
+              name: 'school',
+              message: 'Which school does the intern attend?'
+            }
+          ])
+            .then(({ name, id, email, school }) => {
+              team.push(new Intern(name, id, email, school))
+              Menu()
+            })
+            .catch(err => console.log(err))
+
           break;
         case 'Finish Team':
-          function Finish() {
+          
             inquirer.prompt([
               {
                 type: 'list',
@@ -161,28 +135,25 @@ function Menu() {
             ])
               .then(({ finish }) => {
                 if (finish === 'Yes') {
-                  let htmlPage = render(team)
-                  if (!fs.existsSync(OUTPUT_DIR)) {
-                    fs.mkdirSync(OUTPUT_DIR)
-                  }
-                  fs.writeFile(outputPath, htmlPage, err => {
-                    if (err) {
-                      console.log(err)
-                    }
+                  
+                  fs.writeFile(path.join(__dirname, 'output', 'team.html'), render(team), err => {
+                    if (err) { console.log(err) }
                   })
+                  console.log(team)
                   process.exit()
+
                 } else if (finish === 'No') {
                   Menu()
                 }
               })
               .catch(err => console.log(err))
-          }
+          
           break;
       }
-     
+
     })
-      .catch (err => console.log(err))
-  }
+    .catch(err => console.log(err))
+}
 Menu()
 
 
